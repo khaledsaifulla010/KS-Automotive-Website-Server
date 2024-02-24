@@ -68,6 +68,27 @@ async function run() {
         });
 
 
+        //---------------------------Post cart in My cart------------------------------------------------///
+
+        
+        const MyCart = client.db("BrandsName").collection('MyCart');
+
+        app.post('/MyCart',async(req,res)=>{
+            const newCart = req.body;
+            console.log(newCart);
+            const result = await MyCart.insertOne(newCart);
+            res.send(result);
+        })
+
+
+        //-------------------------Get My Cart Data -----------------------------------------------------///
+
+        app.get('/MyCart', async (req, res) => {
+            const cursor = MyCart.find();
+            const result = await cursor.toArray();
+            res.send(result);
+        })
+
 
 
         // Send a ping to confirm a successful connection

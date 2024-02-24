@@ -32,9 +32,8 @@ async function run() {
 
         //insert Brand name and logo from database
         const BrandsName = client.db("BrandsName").collection('Brands');
-        const AllCars = client.db("BrandsName").collection('AllCars');
 
-        ///Brand name & logo get from database///
+        ///---------------------------Brand name & logo get from database-----------------------------------///
 
         app.get('/Brands', async (req, res) => {
             const cursor = BrandsName.find();
@@ -44,7 +43,9 @@ async function run() {
 
 
 
+        ///----------------------Get All Brands name,price, rating & image from database--------------------///
 
+        const AllCars = client.db("BrandsName").collection('AllCars');
         app.get('/AllCars/:brand', async (req, res) => {
             const brand = req.params.brand;
             console.log(brand)
@@ -55,7 +56,16 @@ async function run() {
 
 
 
+        ///----------------------------Get Brand Details from database--------------------------------------///
+        app.get('/AllCar/:id', async (req, res) => {
+            const id = req.params.id;
+            console.log(id)
+            const query = { _id: new ObjectId(id) }
+            const result = await AllCars.findOne(query);
+            console.log(result)
+            res.send(result)
 
+        });
 
 
 

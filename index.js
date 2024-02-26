@@ -70,10 +70,10 @@ async function run() {
 
         //---------------------------Post cart in My cart------------------------------------------------///
 
-        
+
         const MyCart = client.db("BrandsName").collection('MyCart');
 
-        app.post('/MyCart',async(req,res)=>{
+        app.post('/MyCart', async (req, res) => {
             const newCart = req.body;
             console.log(newCart);
             const result = await MyCart.insertOne(newCart);
@@ -89,6 +89,19 @@ async function run() {
             res.send(result);
         })
 
+
+
+        ///---------------------------POST add product in database
+
+
+        const AddProduct = client.db("BrandsName").collection('AddProduct');
+
+        app.post('/AddProduct', async (req, res) => {
+            const addProduct = req.body;
+            console.log(addProduct);
+            const result = await AddProduct.insertOne(addProduct);
+            res.send(result);
+        })
 
 
         // Send a ping to confirm a successful connection
